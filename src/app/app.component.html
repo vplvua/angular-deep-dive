@@ -21,7 +21,11 @@
       [class.is-even]="$even"
       [class.is-odd]="odd"
       #cardRefs
-    />
+    >
+      <div #cardsTotal>
+        <h5>Course total: 5</h5>
+      </div>
+    </course-card>
     } @empty {
     <div class="empty">
       <p>There are no courses to display</p>

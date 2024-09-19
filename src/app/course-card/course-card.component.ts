@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from "@angular/core";
 import { Course } from "../model/course";
 
 import { ActivatedRoute } from "@angular/router";
@@ -29,6 +36,13 @@ export class CourseCardComponent implements OnInit {
 
   @Output()
   courseSelected = new EventEmitter<Course>();
+
+  @ContentChild("cardsTotal")
+  cardsTotal;
+
+  ngAfterViewInit() {
+    console.log("cardsTotal", this.cardsTotal);
+  }
 
   onCourseViewed() {
     console.log("Card Component button clicked ...");
