@@ -9,10 +9,24 @@
 
 <div>
   <div class="courses" #container>
+    <ng-template #blankImage let-courseName="description">
+      <p class="warn">{{ courseName }} has no image yet.</p>
+
+      <img src="../assets/empty-image.png" />
+    </ng-template>
+
+    <ng-container
+      *ngTemplateOutlet="
+        blankImage;
+        context: { description: courses[0].description }
+      "
+    ></ng-container>
+
     @for (course of courses; track course.id; let index = $index; let count =
     $count; let first = $first; let odd = $odd) {
     <h1 class="title">Count: {{ count }}</h1>
     <course-card
+      [noImageTpl]="blankImage"
       (courseSelected)="onCourseSelected($event)"
       [course]="course"
       [index]="index"

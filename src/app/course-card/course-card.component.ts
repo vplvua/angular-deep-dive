@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  TemplateRef,
 } from "@angular/core";
 import { Course } from "../model/course";
 
@@ -23,6 +24,9 @@ export class CourseCardComponent implements OnInit {
   }
 
   constructor(private routes: ActivatedRoute) {}
+
+  @Input()
+  noImageTpl: TemplateRef<any>;
 
   @Input({
     required: true,

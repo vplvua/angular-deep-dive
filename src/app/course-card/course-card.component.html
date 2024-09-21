@@ -4,7 +4,7 @@
   </div>
   <div>{{ index + 1 }}</div>
 
-  @if (course.iconUrl) {
+  <!-- @if (course.iconUrl) {
   <img width="300" alt="Angular Logo" [src]="course.iconUrl" />
   } @else {
   <img
@@ -12,7 +12,23 @@
     alt="Angular Logo"
     src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png"
   />
-  }
+  } -->
+
+  <img
+    width="300"
+    alt="Angular Logo"
+    [src]="course.iconUrl"
+    *ngIf="course.iconUrl; else noImage"
+  />
+
+  <ng-template #noImage>
+    <ng-container
+      *ngTemplateOutlet="
+        noImageTpl;
+        context: { description: course.description }
+      "
+    ></ng-container>
+  </ng-template>
 
   <ng-content></ng-content>
 
