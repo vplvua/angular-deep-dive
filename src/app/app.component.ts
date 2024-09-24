@@ -1,32 +1,38 @@
-import {AfterViewInit, Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
-import {COURSES} from '../db-data';
-import {Course} from './model/course';
-import {CourseCardComponent} from './course-card/course-card.component';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  QueryList,
+  viewChild,
+  ViewChild,
+  ViewChildren,
+} from "@angular/core";
+import { COURSES } from "../db-data";
+import { Course } from "./model/course";
+import { CourseCardComponent } from "./course-card/course-card.component";
+import { HighlightedDirective } from "./directives/highlighted.directive";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements AfterViewInit {
+  courses = COURSES;
 
-    courses = COURSES;
+  @ViewChildren(CourseCardComponent, { read: ElementRef })
+  cards: QueryList<ElementRef>;
 
+  // @ViewChild(HighlightedDirective)
+  // highlighted: HighlightedDirective;
+  @ViewChild(CourseCardComponent, { read: ElementRef })
+  card: ElementRef;
 
-    @ViewChildren(CourseCardComponent, {read: ElementRef})
-    cards : QueryList<ElementRef>;
+  constructor() {}
 
+  ngAfterViewInit() {}
 
-    constructor() {
-
-    }
-
-    ngAfterViewInit() {
-
-    }
-
-    onCourseSelected(course:Course) {
-
-    }
-
+  onCourseSelected($event: Course) {
+    console.log("App component - course selected: ", $event);
+  }
 }
