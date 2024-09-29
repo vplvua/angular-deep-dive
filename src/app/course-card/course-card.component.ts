@@ -20,7 +20,6 @@ import { CoursesService } from "../services/courses.service";
   selector: "course-card",
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
-  // providers: [CoursesService],
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -34,9 +33,7 @@ export class CourseCardComponent implements OnInit {
 
   constructor(private coursesService: CoursesService) {}
 
-  ngOnInit() {
-    console.log("Courses Service id " + this.coursesService.id);
-  }
+  ngOnInit() {}
 
   onSaveClicked(description: string) {
     this.courseEmitter.emit({ ...this.course, description });
