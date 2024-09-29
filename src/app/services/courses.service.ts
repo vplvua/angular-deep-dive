@@ -5,7 +5,14 @@ import { Course } from "../model/course";
 
 let counter = 0;
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+  // useClass: CoursesService,
+  useFactory: (http: HttpClient) => {
+    return new CoursesService(http);
+  },
+  deps: [HttpClient],
+})
 export class CoursesService {
   id: number;
 
