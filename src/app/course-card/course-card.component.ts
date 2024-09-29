@@ -14,12 +14,13 @@ import {
 } from "@angular/core";
 import { Course } from "../model/course";
 import { CourseImageComponent } from "../course-image/course-image.component";
-import { COURSES_SERVICES } from "../app.component";
+import { CoursesService } from "../services/courses.service";
 
 @Component({
   selector: "course-card",
   templateUrl: "./course-card.component.html",
   styleUrls: ["./course-card.component.css"],
+  // providers: [CoursesService],
 })
 export class CourseCardComponent implements OnInit {
   @Input()
@@ -31,9 +32,11 @@ export class CourseCardComponent implements OnInit {
   @Output("courseChanged")
   courseEmitter = new EventEmitter<Course>();
 
-  constructor(@Inject(COURSES_SERVICES) private coursesService) {}
+  constructor(private coursesService: CoursesService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("Courses Service id " + this.coursesService.id);
+  }
 
   onSaveClicked(description: string) {
     this.courseEmitter.emit({ ...this.course, description });

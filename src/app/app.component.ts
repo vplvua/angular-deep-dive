@@ -16,35 +16,20 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { CoursesService } from "./services/courses.service";
 
-function coursesServiceProvider(http: HttpClient): CoursesService {
-  return new CoursesService(http);
-}
-
-export const COURSES_SERVICES = new InjectionToken<CoursesService>(
-  "COURSES_SERVICES"
-);
-
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [
-    {
-      provide: COURSES_SERVICES,
-      useFactory: coursesServiceProvider,
-      deps: [HttpClient],
-    },
-  ],
+  providers: [CoursesService],
 })
 export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
 
-  constructor(
-    @Inject(COURSES_SERVICES) private coursesService: CoursesService
-  ) {}
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     this.courses$ = this.coursesService.loadCourses();
+    console.log("Courses Service id ", this.coursesService.id);
   }
 
   save(course: Course) {
