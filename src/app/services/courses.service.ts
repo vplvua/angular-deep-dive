@@ -7,12 +7,8 @@ let counter = 0;
 
 @Injectable({
   providedIn: "root",
-  // useClass: CoursesService,
-  useFactory: (http: HttpClient) => {
-    return new CoursesService(http);
-  },
-  deps: [HttpClient],
 })
+// @Injectable()
 export class CoursesService {
   id: number;
 
