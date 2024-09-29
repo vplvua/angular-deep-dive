@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
   courses$: Observable<Course[]>;
 
   constructor(
-    // @Optional() private coursesService: CoursesService,
     private coursesService: CoursesService,
     @Inject(APP_CONFIG_TOKEN) private config: AppConfig
   ) {

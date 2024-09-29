@@ -11,6 +11,7 @@
       *ngFor="let course of courses"
       [course]="course"
       (courseChanged)="save($event)"
+      highlighted
     >
       <course-image [src]="course.iconUrl"></course-image>
     </course-card>
