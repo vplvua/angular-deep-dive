@@ -17,6 +17,7 @@ import { Observable } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { CoursesService } from "./services/courses.service";
 import { APP_CONFIG, APP_CONFIG_TOKEN, AppConfig } from "./config";
+import { COURSES } from "src/db-data";
 
 @Component({
   selector: "app-root",
@@ -24,17 +25,21 @@ import { APP_CONFIG, APP_CONFIG_TOKEN, AppConfig } from "./config";
   styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  courses$: Observable<Course[]>;
+  courses = COURSES;
 
-  constructor(
-    private coursesService: CoursesService,
-    @Inject(APP_CONFIG_TOKEN) private config: AppConfig
-  ) {
-    console.log(this.config);
-  }
+  constructor(private coursesService: CoursesService) {}
 
-  ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
+  ngOnInit() {}
+
+  onEditCourse() {
+    let course = this.courses[0];
+
+    let newCourse = {
+      ...course,
+      description: "New Value",
+    };
+
+    this.courses[0] = newCourse;
   }
 
   save(course: Course) {

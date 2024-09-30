@@ -6,12 +6,16 @@
 </div>
 
 <div>
-  <div class="courses" *ngIf="courses$ | async as courses">
+  <div class="demo">
+    <h2>Course Manager</h2>
+    <button (click)="onEditCourse()">Change Course</button>
+  </div>
+
+  <div class="courses" *ngIf="courses">
     <course-card
       *ngFor="let course of courses"
       [course]="course"
       (courseChanged)="save($event)"
-      highlighted
     >
       <course-image [src]="course.iconUrl"></course-image>
     </course-card>

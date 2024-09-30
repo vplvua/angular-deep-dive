@@ -8,17 +8,10 @@ let counter = 0;
 @Injectable({
   providedIn: "root",
 })
-// @Injectable()
 export class CoursesService {
   id: number;
 
-  constructor(private http: HttpClient) {
-    counter++;
-
-    this.id = counter;
-
-    console.log("Creating new CoursesService " + this.id);
-  }
+  constructor(private http: HttpClient) {}
 
   loadCourses(): Observable<Course[]> {
     const params = new HttpParams().set("page", "1").set("pageSize", "10");
