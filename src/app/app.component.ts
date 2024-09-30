@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   Inject,
@@ -27,12 +28,18 @@ import { COURSES } from "src/db-data";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  courses$: Observable<Course[]>;
+  courses: Course[];
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private cd: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    this.courses$ = this.coursesService.loadCourses();
+    this.coursesService.loadCourses().subscribe((courses) => {
+      this.courses = courses;
+      this.cd.markForCheck();
+    });
   }
 
   onEditCourse() {}
