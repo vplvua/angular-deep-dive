@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DoCheck,
   ElementRef,
   Inject,
   InjectionToken,
@@ -27,18 +28,29 @@ import { COURSES } from "src/db-data";
   styleUrls: ["./app.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, DoCheck {
   courses: Course[];
+
+  loaded = false;
 
   constructor(
     private coursesService: CoursesService,
     private cd: ChangeDetectorRef
   ) {}
 
+  ngDoCheck(): void {
+    console.log("AppComponent - DoCheck");
+    if (this.loaded) {
+      console.log("AppComponent - DoCheck - courses found");
+      this.cd.markForCheck();
+      this.loaded = undefined;
+    }
+  }
+
   ngOnInit() {
     this.coursesService.loadCourses().subscribe((courses) => {
       this.courses = courses;
-      this.cd.markForCheck();
+      this.loaded = true;
     });
   }
 
