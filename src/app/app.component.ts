@@ -27,18 +27,12 @@ import { COURSES } from "src/db-data";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  // courses$: Observable<Course[]>;
-
-  courses: Course[];
+  courses$: Observable<Course[]>;
 
   constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
-    // this.courses$ = this.coursesService.loadCourses();
-
-    this.coursesService.loadCourses().subscribe((courses) => {
-      this.courses = courses;
-    });
+    this.courses$ = this.coursesService.loadCourses();
   }
 
   onEditCourse() {}
