@@ -1,15 +1,20 @@
 import {
+  AfterContentChecked,
   AfterContentInit,
+  AfterViewChecked,
   AfterViewInit,
   Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  DoCheck,
   ElementRef,
   EventEmitter,
   Inject,
   Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Optional,
   Output,
@@ -28,7 +33,17 @@ import { CoursesService } from "../services/courses.service";
   styleUrls: ["./course-card.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCardComponent implements OnInit {
+export class CourseCardComponent
+  implements
+    OnInit,
+    OnDestroy,
+    OnChanges,
+    AfterContentChecked,
+    AfterViewChecked,
+    AfterContentInit,
+    AfterViewInit,
+    DoCheck
+{
   @Input()
   course: Course;
 
@@ -43,10 +58,40 @@ export class CourseCardComponent implements OnInit {
     @Attribute("type") private type: string,
     private cd: ChangeDetectorRef
   ) {
-    console.log("Type", this.type);
+    console.log("constructor");
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log("ngOnInit");
+  }
+
+  ngOnChanges(changes) {
+    console.log("ngOnChanges", changes);
+  }
+
+  ngAfterContentChecked() {
+    console.log("ngAfterContentChecked");
+
+    this.course.category = "ADVANCED";
+
+    // this.course.iconUrl = "";
+  }
+
+  ngAfterViewChecked() {
+    console.log("ngAfterViewChecked");
+  }
+
+  ngAfterContentInit(): void {
+    console.log("ngAfterContentInit");
+  }
+
+  ngAfterViewInit() {
+    console.log("ngAfterViewInit");
+  }
+
+  ngDoCheck(): void {
+    console.log("ngDoCheck");
+  }
 
   onTitleChanged(newTitle: string) {
     this.course.description = newTitle;
@@ -54,5 +99,9 @@ export class CourseCardComponent implements OnInit {
 
   onSaveClicked(description: string) {
     this.courseEmitter.emit({ ...this.course, description });
+  }
+
+  ngOnDestroy() {
+    console.log("ngOnChanges");
   }
 }

@@ -7,6 +7,8 @@ import {
   ElementRef,
   Inject,
   InjectionToken,
+  OnChanges,
+  OnDestroy,
   OnInit,
   Optional,
   QueryList,
@@ -26,35 +28,29 @@ import { COURSES } from "src/db-data";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit, DoCheck {
-  courses: Course[];
-
-  loaded = false;
+export class AppComponent implements OnInit, OnChanges, OnDestroy {
+  courses: Course[] = COURSES;
 
   constructor(
     private coursesService: CoursesService,
     private cd: ChangeDetectorRef
   ) {}
 
-  ngDoCheck(): void {
-    console.log("AppComponent - DoCheck");
-    if (this.loaded) {
-      console.log("AppComponent - DoCheck - courses found");
-      this.cd.markForCheck();
-      this.loaded = undefined;
-    }
-  }
+  ngOnChanges() {}
 
-  ngOnInit() {
-    this.coursesService.loadCourses().subscribe((courses) => {
-      this.courses = courses;
-      this.loaded = true;
-    });
-  }
+  ngOnInit() {}
 
-  onEditCourse() {}
+  onEditCourse() {
+    const course = this.courses[0];
+
+    const newCourse = {
+      ...course,
+      description: "New Value",
+    };
+
+    this.courses[0] = newCourse;
+  }
 
   save(course: Course) {
     this.coursesService.saveCourse(course).subscribe(
@@ -66,4 +62,6 @@ export class AppComponent implements OnInit, DoCheck {
       }
     );
   }
+
+  ngOnDestroy() {}
 }
