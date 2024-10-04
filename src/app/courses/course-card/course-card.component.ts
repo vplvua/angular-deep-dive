@@ -33,17 +33,7 @@ import { CoursesService } from "../courses.service";
   styleUrls: ["./course-card.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CourseCardComponent
-  implements
-    OnInit,
-    OnDestroy,
-    OnChanges,
-    AfterContentChecked,
-    AfterViewChecked,
-    AfterContentInit,
-    AfterViewInit,
-    DoCheck
-{
+export class CourseCardComponent implements OnInit, OnDestroy {
   @Input()
   course: Course;
 
@@ -63,34 +53,6 @@ export class CourseCardComponent
 
   ngOnInit() {
     console.log("ngOnInit");
-  }
-
-  ngOnChanges(changes) {
-    console.log("ngOnChanges", changes);
-  }
-
-  ngAfterContentChecked() {
-    console.log("ngAfterContentChecked");
-
-    this.course.category = "ADVANCED";
-
-    // this.course.iconUrl = "";
-  }
-
-  ngAfterViewChecked() {
-    console.log("ngAfterViewChecked");
-  }
-
-  ngAfterContentInit(): void {
-    console.log("ngAfterContentInit");
-  }
-
-  ngAfterViewInit() {
-    console.log("ngAfterViewInit");
-  }
-
-  ngDoCheck(): void {
-    console.log("ngDoCheck");
   }
 
   onTitleChanged(newTitle: string) {

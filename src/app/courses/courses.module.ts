@@ -5,6 +5,7 @@ import { CourseImageComponent } from "./course-image/course-image.component";
 import { CoursesService } from "./courses.service";
 import { HighlightedDirective } from "./directives/highlighted.directive";
 import { NgxUnlessDirective } from "./directives/ngx-unless.directive";
+import { FilterByCategoryPipe } from "./directives/filter-by-category.pipe";
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { NgxUnlessDirective } from "./directives/ngx-unless.directive";
     CourseImageComponent,
     HighlightedDirective,
     NgxUnlessDirective,
+    FilterByCategoryPipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -19,6 +21,7 @@ import { NgxUnlessDirective } from "./directives/ngx-unless.directive";
     CourseImageComponent,
     HighlightedDirective,
     NgxUnlessDirective,
+    FilterByCategoryPipe,
   ],
   providers: [CoursesService],
 })
