@@ -7,7 +7,7 @@ import {
   Input,
   Output,
 } from "@angular/core";
-import { CoursesService } from "../services/courses.service";
+import { CoursesService } from "../courses.service";
 
 @Directive({
   selector: "[highlighted]",

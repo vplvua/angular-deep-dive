@@ -16,13 +16,8 @@ import {
   ViewChildren,
 } from "@angular/core";
 import { Course } from "./model/course";
-import { CourseCardComponent } from "./course-card/course-card.component";
-import { HighlightedDirective } from "./directives/highlighted.directive";
-import { Observable } from "rxjs";
-import { HttpClient, HttpParams } from "@angular/common/http";
-import { CoursesService } from "./services/courses.service";
-import { APP_CONFIG, APP_CONFIG_TOKEN, AppConfig } from "./config";
 import { COURSES } from "src/db-data";
+import { CoursesService } from "./courses/courses.service";
 
 @Component({
   selector: "app-root",
